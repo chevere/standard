@@ -101,3 +101,11 @@ function arrayFromKey(array $array, string|int ...$key): array
 {
     return (new ArrayStandard($array))->fromKey(...$key);
 }
+
+function randomString(int $length): string
+{
+    // @phpstan-ignore-next-line
+    $randomBytes = random_bytes($length);
+
+    return substr(bin2hex($randomBytes), 0, $length);
+}
