@@ -71,6 +71,14 @@ function arrayChangeKey(array $array, string|int ...$key): array
 /**
  * @phpstan-ignore-next-line
  */
+function arrayChangeValue(array $array, mixed $search, mixed $replace = null): array
+{
+    return (new ArrayStandard($array))->changeValue($search, $replace);
+}
+
+/**
+ * @phpstan-ignore-next-line
+ */
 function arrayPrefixKeys(array $array, string|int $prefix): array
 {
     return (new ArrayStandard($array))->prefixKeys($prefix);

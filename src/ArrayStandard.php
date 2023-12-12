@@ -81,13 +81,25 @@ final class ArrayStandard
     public function changeKey(string|int ...$key): array
     {
         $array = $this->array;
-        foreach ($key as $name => $change) {
-            $name = strval($name);
-            if (! array_key_exists($name, $array)) {
+        foreach ($key as $search => $replace) {
+            $search = strval($search);
+            if (! array_key_exists($search, $array)) {
                 continue;
             }
-            $array[$change] = $array[$name];
-            unset($array[$name]);
+            $array[$replace] = $array[$search];
+            unset($array[$search]);
+        }
+
+        return $array;
+    }
+
+    // @phpstan-ignore-next-line
+    public function changeValue(mixed $search, mixed $replace): array
+    {
+        $array = $this->array;
+        $keys = array_keys($array, $search, true);
+        foreach ($keys as $key) {
+            $array[$key] = $replace;
         }
 
         return $array;
