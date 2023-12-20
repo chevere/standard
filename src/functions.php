@@ -118,6 +118,36 @@ function arrayFromKey(array $array, string|int ...$key): array
     return (new ArrayStandard($array))->fromKey(...$key);
 }
 
+/**
+ * Takes packing instruction and generates sub-arrays with matched keys.
+ * @param string ...$packing Named packing as `startNeedle: 'grouping',`
+ * @phpstan-ignore-next-line
+ */
+function arrayPack(array $array, string ...$packing): array
+{
+    $return = $array;
+    $trash = [];
+    $keys = array_keys($array);
+    foreach ($packing as $split => $group) {
+        $split = (string) $split;
+        $find = array_filter($keys, function ($key) use ($split) {
+            return strpos($key, $split) === 0;
+        });
+        if ($find === []) {
+            continue;
+        }
+        $return[$group] = [];
+        foreach ($find as $key) {
+            $key = (string) $key;
+            $trash[] = $key;
+            $groupedKey = (string) str_replace($split, '', $key);
+            $return[$group][$groupedKey] = $array[$key];
+        }
+    }
+
+    return arrayUnsetKey($return, ...$trash);
+}
+
 function randomString(int $length): string
 {
     // @phpstan-ignore-next-line
