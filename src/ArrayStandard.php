@@ -152,4 +152,12 @@ final class ArrayStandard
 
         return array_map(fn ($value) => $prefix . $value, $array);
     }
+
+    // @phpstan-ignore-next-line
+    public function suffixValues(string|int|float $suffix): array
+    {
+        $array = $this->array;
+
+        return array_map(fn ($value) => $value . $suffix, $array);
+    }
 }

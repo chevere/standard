@@ -93,6 +93,14 @@ function arrayPrefixValues(array $array, string|int|float $prefix): array
 }
 
 /**
+ * @phpstan-ignore-next-line
+ */
+function arraySuffixValues(array $array, string|int|float $suffix): array
+{
+    return (new ArrayStandard($array))->suffixValues($suffix);
+}
+
+/**
  * @param string|int $key Key(s) to unset.
  * @phpstan-ignore-next-line
  */
