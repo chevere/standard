@@ -120,12 +120,13 @@ function arrayFromKey(array $array, string|int ...$key): array
 
 /**
  * Takes packing instruction and generates sub-arrays with matched keys.
+ *
+ * @param array $array Array to pack (contains keys starting with needle)
  * @param string ...$packing Named packing as `startNeedle: 'grouping',`
  * @phpstan-ignore-next-line
  */
 function arrayPack(array $array, string ...$packing): array
 {
-    $return = $array;
     $trash = [];
     $keys = array_keys($array);
     foreach ($packing as $split => $group) {
@@ -136,16 +137,16 @@ function arrayPack(array $array, string ...$packing): array
         if ($find === []) {
             continue;
         }
-        $return[$group] = [];
+        $array[$group] = [];
         foreach ($find as $key) {
             $key = (string) $key;
             $trash[] = $key;
             $groupedKey = (string) str_replace($split, '', $key);
-            $return[$group][$groupedKey] = $array[$key];
+            $array[$group][$groupedKey] = $array[$key];
         }
     }
 
-    return arrayUnsetKey($return, ...$trash);
+    return arrayUnsetKey($array, ...$trash);
 }
 
 function randomString(int $length): string
