@@ -18,7 +18,7 @@ use function Chevere\Standard\randomString;
 
 final class RandomStringFunctionTest extends TestCase
 {
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         return [
             [10],

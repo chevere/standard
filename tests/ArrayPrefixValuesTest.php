@@ -18,7 +18,7 @@ use function Chevere\Standard\arrayPrefixValues;
 
 final class ArrayPrefixValuesTest extends TestCase
 {
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         return [
             ['foo', 'bar'],

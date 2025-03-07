@@ -18,7 +18,7 @@ use function Chevere\Standard\getBits;
 
 final class GetBitsFunctionTest extends TestCase
 {
-    public function bitsProvider(): array
+    public static function bitsProvider(): array
     {
         return [
             [1, [1]],
