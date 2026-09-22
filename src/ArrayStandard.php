@@ -15,13 +15,11 @@ namespace Chevere\Standard;
 
 final class ArrayStandard
 {
-    // @phpstan-ignore-next-line
     public function __construct(
         private readonly array $array
     ) {
     }
 
-    // @phpstan-ignore-next-line
     public function filterBoth(?callable $callback = null): array
     {
         $array = $this->array;
@@ -39,7 +37,6 @@ final class ArrayStandard
         return $array;
     }
 
-    // @phpstan-ignore-next-line
     public function filterValue(?callable $callback = null): array
     {
         $array = $this->array;
@@ -59,7 +56,6 @@ final class ArrayStandard
         return $array;
     }
 
-    // @phpstan-ignore-next-line
     public function filterKey(?callable $callback = null): array
     {
         $array = $this->array;
@@ -77,7 +73,6 @@ final class ArrayStandard
         return $array;
     }
 
-    // @phpstan-ignore-next-line
     public function changeKey(string|int ...$key): array
     {
         $array = $this->array;
@@ -93,7 +88,6 @@ final class ArrayStandard
         return $array;
     }
 
-    // @phpstan-ignore-next-line
     public function changeValue(mixed $search, mixed $replace): array
     {
         $array = $this->array;
@@ -105,7 +99,6 @@ final class ArrayStandard
         return $array;
     }
 
-    // @phpstan-ignore-next-line
     public function prefixKeys(string|int $prefix): array
     {
         $array = $this->array;
@@ -118,7 +111,6 @@ final class ArrayStandard
         return $return;
     }
 
-    // @phpstan-ignore-next-line
     public function unsetKey(string|int ...$key): array
     {
         $array = $this->array;
@@ -131,7 +123,6 @@ final class ArrayStandard
         return $array;
     }
 
-    // @phpstan-ignore-next-line
     public function fromKey(string|int ...$key): array
     {
         $array = $this->array;
@@ -145,7 +136,6 @@ final class ArrayStandard
         return $return;
     }
 
-    // @phpstan-ignore-next-line
     public function prefixValues(string|int|float $prefix): array
     {
         $array = $this->array;
@@ -153,7 +143,6 @@ final class ArrayStandard
         return array_map(fn ($value) => $prefix . $value, $array);
     }
 
-    // @phpstan-ignore-next-line
     public function suffixValues(string|int|float $suffix): array
     {
         $array = $this->array;

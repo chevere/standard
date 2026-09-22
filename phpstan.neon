@@ -2,3 +2,13 @@ parameters:
     level: 9
     paths:
         - src
+    ignoreErrors:
+        -
+            message: '#^Property Chevere\\Standard\\Errors::\$errors .* does not accept non-empty-array<int, non-empty-array<int<0, max>\|string, string>>\.$#'
+            path: src/Errors.php
+        -
+            message: '#^Method Chevere\\Standard\\ArrayStandard::.* has parameter \$array with no value type specified in iterable type array\.$#'
+            path: src/ArrayStandard.php
+        -
+            message: '#^Method Chevere\\Standard\\ArrayStandard::.* return type has no value type specified in iterable type array\.$#'
+            path: src/ArrayStandard.php
