@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Chevere\Tests;
+namespace Chevere\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 use function Chevere\Standard\arrayPrefixValues;
