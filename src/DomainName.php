@@ -26,7 +26,7 @@ final class DomainName
     {
         $domain = rtrim(trim($domain), '.');
         if ($domain === '') {
-            throw new InvalidArgumentException('Invalid custom domain');
+            throw new InvalidArgumentException();
         }
         $ascii = idn_to_ascii(
             $domain,
@@ -34,13 +34,13 @@ final class DomainName
             INTL_IDNA_VARIANT_UTS46
         );
         if ($ascii === false) {
-            throw new InvalidArgumentException('Invalid custom domain');
+            throw new InvalidArgumentException();
         }
         $ascii = strtolower($ascii);
         if (! str_contains($ascii, '.')
             || filter_var($ascii, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false
         ) {
-            throw new InvalidArgumentException('Invalid custom domain');
+            throw new InvalidArgumentException();
         }
 
         return $ascii;
