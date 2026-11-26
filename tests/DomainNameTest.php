@@ -23,7 +23,7 @@ final class DomainNameTest extends TestCase
     /**
      * @return array<string, array{string, string}>
      */
-    public static function validProvider(): array
+    public static function dataProviderValid(): array
     {
         return [
             'lowercase' => ['img.example.com', 'img.example.com'],
@@ -36,7 +36,7 @@ final class DomainNameTest extends TestCase
         ];
     }
 
-    #[DataProvider('validProvider')]
+    #[DataProvider('dataProviderValid')]
     public function testNormalize(string $input, string $expected): void
     {
         $this->assertSame($expected, DomainName::normalize($input));
@@ -45,7 +45,7 @@ final class DomainNameTest extends TestCase
     /**
      * @return array<string, array{string}>
      */
-    public static function invalidProvider(): array
+    public static function dataProviderInvalid(): array
     {
         return [
             'empty' => [''],
@@ -57,10 +57,13 @@ final class DomainNameTest extends TestCase
             'scheme' => ['https://img.example.com'],
             'path' => ['img.example.com/path'],
             'label too long' => [str_repeat('a', 64) . '.example.com'],
+            'ending numeric' => ['example.123'],
+            'IPv4' => ['127.0.0.1'],
+            'IPv6' => ['[::1]'],
         ];
     }
 
-    #[DataProvider('invalidProvider')]
+    #[DataProvider('dataProviderInvalid')]
     public function testNormalizeInvalid(string $input): void
     {
         $this->expectException(InvalidArgumentException::class);

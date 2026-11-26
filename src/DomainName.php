@@ -18,7 +18,9 @@ use InvalidArgumentException;
 final class DomainName
 {
     /**
-     * Normalizes a custom domain to its lowercase ASCII (punycode) form.
+     * Normalizes a domain name to its lowercase ASCII (punycode) form.
+     *
+     * Rejects IP addresses and top-level labels not ending in a letter.
      *
      * @throws InvalidArgumentException If the domain is not a valid hostname
      */
@@ -39,6 +41,7 @@ final class DomainName
         $ascii = strtolower($ascii);
         if (! str_contains($ascii, '.')
             || filter_var($ascii, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false
+            || ! ctype_alpha(substr($ascii, -1))
         ) {
             throw new InvalidArgumentException();
         }
